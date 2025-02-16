@@ -36,7 +36,7 @@ mongoose.connect(process.env.MONGO_URI, {
 const upload = multer({ "storage": storage });
 
 app.post("/post", upload.single('image'), (req, res) => {
-    const path1 = `https://npm345.vercel.app/uploads/${req.file.filename}`;
+    const path1 = `https://npm3451.vercel.app/uploads/${req.file.filename}`;
     
     const amn = new npt({ image: path1, text: req.body.text });
     try {
@@ -60,7 +60,7 @@ app.get("/get", async (req, res) => {
 });
 
 app.post('/send', upload.single('image'), (req, res) => {
-    const fi = `https://npm345.vercel.app/uploads/${req.file.filename}`;
+    const fi = `https://npm3451.vercel.app/uploads/${req.file.filename}`;
     const oi = new mode1({ image: fi, text: req.body.text });
     try {
         oi.save();
