@@ -6,6 +6,7 @@ const New1=new mongoose.Schema({
     text:{
         type:String,
         require:true
-    }
+    },
+   
 })
 module.exports=mongoose.model("new1",New1)

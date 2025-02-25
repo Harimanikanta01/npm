@@ -6,7 +6,11 @@ const Banner=new mongoose.Schema({
     },
     text:{
         type:String
-    }
+    },
+    banner:{
+        required:true,
+        type:String,
+            }
 
 })
 module.exports=mongoose.model("Banner",Banner)

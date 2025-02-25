@@ -8,6 +8,7 @@ const cors = require("cors");
 const npt = require("./Model");
 const path = require('path');
 const mode1 = require("./model1");
+const model1 = require('./model1');
 
 app.use(cors());
 
@@ -22,14 +23,10 @@ const storage = multer.diskStorage({
 
 app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-  console.log("DB connected successfully");
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
-.catch(error => {
-  console.error("DB connection error:", error);
-});
-
 .then(() => {
     console.log("DB connected successfully");
 })
@@ -40,12 +37,12 @@ mongoose.connect(process.env.MONGO_URI)
 const upload = multer({ "storage": storage });
 
 app.post("/post", upload.single('image'), (req, res) => {
-    const path1 = `https://npm3451.vercel.app/uploads/${req.file.filename}`;
-    
-    const amn = new npt({ image: path1, text: req.body.text });
+    const path1 = `http://localhost:4000/uploads/${req.file.filename}`;
+
+    const amn = new npt({ image: path1, text: req.body.text,banner:path1});
     try {
         amn.save();
-        console.log("sended to db");
+        console.log("sended to db",amn);
         res.send("verified");
     } catch (error) {
         console.log(error);
@@ -63,9 +60,10 @@ app.get("/get", async (req, res) => {
     }
 });
 
-app.post('/send', upload.single('image'), (req, res) => {
-    const fi = `https://npm3451.vercel.app/uploads/${req.file.filename}`;
-    const oi = new mode1({ image: fi, text: req.body.text });
+app.post('/send', upload.fields([{name:'image'},{name:'banner'}]), (req, res) => {
+    const fi = `http://localhost:4000/uploads/${req.files.image[0].filename}`;
+    const fl = `http://localhost:4000/uploads/${req.files.banner[0].filename}`;
+    const oi = new mode1({ image: fi, text: req.body.text,banner:fl});
     try {
         oi.save();
         console.log("send to db");
@@ -89,6 +87,16 @@ app.get('/take', async (req, res) => {
 app.get("/", async (req, res) => {
     res.send("ok");
 });
+app.get('/item/:id',async(req,res)=>{
+    const id=req.params.id
+    try{
+        const md=await model1.findById(id)
+        res.json(md)
+    }
+    catch(error){
+        console.log(error)
+    }
+})
 const port = process.env.PORT || 4000;
 app.listen(port|| 4000, () => {
     console.log(`Server running on port ${process.env.PORT || 4000}`);
