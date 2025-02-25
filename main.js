@@ -37,7 +37,7 @@ mongoose.connect(process.env.MONGO_URI, {
 const upload = multer({ "storage": storage });
 
 app.post("/post", upload.single('image'), (req, res) => {
-    const path1 = `https://npm-ucmh.onrender.com//${req.file.filename}`;
+    const path1 = `https://npm-ucmh.onrender.com/${req.file.filename}`;
 
     const amn = new npt({ image: path1, text: req.body.text,banner:path1});
     try {
