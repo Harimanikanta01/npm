@@ -1,4 +1,4 @@
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config(); 
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -37,7 +37,7 @@ mongoose.connect(process.env.MONGO_URI, {
 const upload = multer({ "storage": storage });
 
 app.post("/post", upload.single('image'), (req, res) => {
-    const path1 = `http://localhost:4000/uploads/${req.file.filename}`;
+    const path1 = `https://npm-ucmh.onrender.com//${req.file.filename}`;
 
     const amn = new npt({ image: path1, text: req.body.text,banner:path1});
     try {
@@ -61,8 +61,8 @@ app.get("/get", async (req, res) => {
 });
 
 app.post('/send', upload.fields([{name:'image'},{name:'banner'}]), (req, res) => {
-    const fi = `http://localhost:4000/uploads/${req.files.image[0].filename}`;
-    const fl = `http://localhost:4000/uploads/${req.files.banner[0].filename}`;
+    const fi = `https://npm-ucmh.onrender.com/${req.files.image[0].filename}`;
+    const fl = `https://npm-ucmh.onrender.com/${req.files.banner[0].filename}`;
     const oi = new mode1({ image: fi, text: req.body.text,banner:fl});
     try {
         oi.save();
