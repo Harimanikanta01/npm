@@ -22,11 +22,7 @@ const storage = multer.diskStorage({
 });
 
 app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
-
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect("mongodb+srv://punugulahari1:12345@cluster0.fmy2e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 .then(() => {
     console.log("DB connected successfully");
 })
