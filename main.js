@@ -33,7 +33,7 @@ mongoose.connect("mongodb+srv://punugulahari1:12345@cluster0.fmy2e.mongodb.net/?
 const upload = multer({ "storage": storage });
 
 app.post("/post", upload.single('image'), (req, res) => {
-    const path1 = `https://npm-1.onrender.com/uploads/${req.file.filename}`;
+    const path1 = `https://npm-navy.vercel.app/uploads/${req.file.filename}`;
 
     const amn = new npt({ image: path1, text: req.body.text,banner:path1});
     try {
@@ -57,8 +57,8 @@ app.get("/get", async (req, res) => {
 });
 
 app.post('/send', upload.fields([{name:'image'},{name:'banner'}]), (req, res) => {
-    const fi = `https://npm-1.onrender.com/uploads/${req.files.image[0].filename}`;
-    const fl = `https://npm-1.onrender.com/uploads/${req.files.banner[0].filename}`;
+    const fi = `https://npm-navy.vercel.app/uploads/${req.files.image[0].filename}`;
+    const fl = `https://npm-navy.vercel.app/uploads/${req.files.banner[0].filename}`;
     const oi = new mode1({ image: fi, text: req.body.text,banner:fl});
     try {
         oi.save();
