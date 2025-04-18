@@ -192,7 +192,24 @@ app.get("/movieg2", async (req, res) => {
     res.status(500).send({ message: "Server Error" });
   }
 });
-
+app.get('/get',async(req,res)=>{
+  const cd=await npt.find()
+  try{
+    res.send(cd)
+  }
+  catch(error){
+console.log(error)
+  }
+})
+app.get('/take',async(req,res)=>{
+  const cd=await mode1.find()
+  try{
+    res.send(cd)
+  }
+  catch(error){
+console.log(error)
+  }
+})
 const port = process.env.PORT || 6000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
