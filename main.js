@@ -183,17 +183,17 @@ catch(error){
   console.log(error)
 }
 })
-app.get("/movieg2",async(req,res)=>{
-  const bbp=await mongoose.model4
-  try{
+app.get("/movieg2", async (req, res) => {
+  try {
+    const movies = await model4.find(); 
+    res.status(200).send(movies);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
 
-    req.send(bbp)
-  }
-  catch(error){
-    console.log(error)
-  }
-})
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
