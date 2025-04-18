@@ -10,7 +10,10 @@ const Banner=new mongoose.Schema({
     banner:{
         required:true,
         type:String,
-            }
+            },
+    video:{
+        type:String
+    }
 
 })
 module.exports=mongoose.model("Banner",Banner)
