@@ -210,6 +210,16 @@ app.get('/take',async(req,res)=>{
 console.log(error)
   }
 })
+app.get('/item1/:id',async(req,res)=>{
+  const nba=req.params.id
+  try{
+const gh=await model4.findById(nba).lean()
+res.send(gh)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 const port = process.env.PORT || 6000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
